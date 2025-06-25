@@ -72,7 +72,7 @@
         transition: background-color 0.3s ease;
         border-bottom: 1px solid #e0e0e0;
         display: flex;
-        justify-content: space-between;
+        justify-content: between;
         align-items: center;
       }
 
@@ -726,4 +726,73 @@
               </tr>
               <tr>
                 <td class="date-col">17.01.2025</td>
-                <t
+                <td class="round-col">
+                  <span class="round-name">Third Round</span>
+                </td>
+                <td class="opponent-col">Aleksandar Vukic</td>
+                <td class="result-col score">6-4, 2-6, 5-7, 7-6(5), 6-8</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">15.01.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Second Round</span>
+                </td>
+                <td class="opponent-col">Thanasi Kokkinakis</td>
+                <td class="result-col score">6-3, 6-3, 3-7, 6-5, 6-3</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">13.01.2025</td>
+                <td class="round-col">
+                  <span class="round-name">First Round</span>
+                </td>
+                <td class="opponent-col">Mariano Navone</td>
+                <td class="result-col score">4-6, 6-3, 3-6, 6-3, 6-2</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleTournament(tournamentId) {
+        const content = document.getElementById(tournamentId + "-content");
+        const icon = document.getElementById(tournamentId + "-icon");
+
+        if (content.classList.contains("active")) {
+          content.classList.remove("active");
+          icon.innerHTML = "▼";
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          content.classList.add("active");
+          icon.innerHTML = "▲";
+          icon.style.transform = "rotate(180deg)";
+        }
+      }
+
+      // Optional: Close all other tournaments when opening one
+      function toggleTournamentExclusive(tournamentId) {
+        // Close all tournaments first
+        const allContents = document.querySelectorAll(".tournament-content");
+        const allIcons = document.querySelectorAll(".toggle-icon");
+
+        allContents.forEach((content) => content.classList.remove("active"));
+        allIcons.forEach((icon) => {
+          icon.innerHTML = "▼";
+          icon.style.transform = "rotate(0deg)";
+        });
+
+        // Open the clicked tournament
+        const content = document.getElementById(tournamentId + "-content");
+        const icon = document.getElementById(tournamentId + "-icon");
+
+        content.classList.add("active");
+        icon.innerHTML = "▲";
+        icon.style.transform = "rotate(180deg)";
+      }
+    </script>
+  </body>
+</html>
