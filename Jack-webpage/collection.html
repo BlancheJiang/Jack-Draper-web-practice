@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collection</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Georgia", sans-serif;
+        background: whitesmoke;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .back-link {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        color: rgb(20, 20, 80);
+        text-decoration: none;
+        font-weight: bold;
+        z-index: 10;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: rgb(20, 20, 80);
+        font-size: 3rem;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-gap: 20px;
+        grid-auto-rows: 20px;
+      }
+
+      .image-item {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: white;
+      }
+
+      .image-item:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+      }
+
+      /* Different heights for masonry effect */
+      .image-item:nth-child(1) {
+        grid-row-end: span 12;
+      }
+      .image-item:nth-child(2) {
+        grid-row-end: span 15;
+      }
+      .image-item:nth-child(3) {
+        grid-row-end: span 10;
+      }
+      .image-item:nth-child(4) {
+        grid-row-end: span 14;
+      }
+      .image-item:nth-child(5) {
+        grid-row-end: span 11;
+      }
+      .image-item:nth-child(6) {
+        grid-row-end: span 16;
+      }
+      .image-item:nth-child(7) {
+        grid-row-end: span 13;
+      }
+      .image-item:nth-child(8) {
+        grid-row-end: span 9;
+      }
+      .image-item:nth-child(9) {
+        grid-row-end: span 12;
+      }
+      .image-item:nth-child(10) {
+        grid-row-end: span 14;
+      }
+      .image-item:nth-child(11) {
+        grid-row-end: span 14;
+      }
+      .image-item:nth-child(12) {
+        grid-row-end: span 13;
+      }
+
+      .JD_image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      /* Fallback for when no image is provided */
+      .JD_image.gradient-fallback {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          #ff6b6b,
+          #4ecdc4,
+          #45b7d1,
+          #96ceb4,
+          #ffeaa7,
+          #fd79a8
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 6s ease infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        padding: 20px;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.8),
+          rgba(0, 0, 0, 0.6)
+        );
+        color: white;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+
+      .image-item:hover .image-overlay {
+        opacity: 1;
+      }
+
+      .overlay-content {
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+      }
+
+      .image-item:hover .overlay-content {
+        transform: translateY(0);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        margin: 3% auto;
+        padding: 40px;
+        border-radius: 25px;
+        width: 90%;
+        max-width: 650px;
+        position: relative;
+        animation: modalSlideIn 0.4s ease;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-50px) scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #666;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        line-height: 1;
+      }
+
+      .close:hover {
+        color: #333;
+        transform: scale(1.1);
+      }
+
+      .modal h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 2rem;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .modal p {
+        color: #555;
+        line-height: 1.7;
+        font-size: 1.1rem;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .masonry-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          grid-gap: 15px;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+          margin-bottom: 30px;
+        }
+
+        .modal-content {
+          margin: 10% auto;
+          padding: 30px;
+        }
+
+        .modal h2 {
+          font-size: 1.6rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .masonry-grid {
+          grid-template-columns: 1fr;
+          grid-gap: 12px;
+        }
+
+        .image-item:nth-child(n) {
+          grid-row-end: span 10;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="<!DOCTYPE html>.html" class="back-link">← Back to Home</a>
+    <div class="container">
+      <h1>Collection</h1>
+
+      <div class="masonry-grid">
+        <div class="image-item" onclick="openModal('modal1')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_1516.jpeg"
+            alt="Jack Draper Poster"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              From Indian Wells to Miami to Madrid & the journey continues
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal2')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_1524.JPG"
+            alt="Jack enter top 10"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              After the match against Carlos at IW Semifinal, Jack entered Top
+              10 for the first time!
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal3')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_5067.PNG"
+            alt="Definitely Maybe Draper ver."
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              Can't go wrong with this Oasis classic
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal4')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_1590.JPG"
+            alt="Jack enter top 5"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              Jack entered into Top 5 after the match against Arnaldi at Madrid
+              QF
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal5')">
+          <img class="JD_image" src="Poster/IMG_1625.jpg" alt="Madrid Film" />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              Even though Madrid has ended, the film lasts
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal6')">
+          <img class="JD_image" src="Poster/IMG_9541.jpg" alt="100 wins" />
+          <div class="image-overlay">
+            <div class="overlay-content">100 Wins on the Tour</div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal7')">
+          <img
+            class="JD_image"
+            src="Poster/nike poster.png"
+            alt="Nike striped outfit"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              This outfit will be missed, it really carries a lot of my memories
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal8')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_0682.JPG"
+            alt="RG round of 16"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">Second week of RG here we go</div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal9')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_1707.JPG"
+            alt="Jack enters Top 4"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              Four-ever supporting you, what a meteoric rise
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal10')">
+          <img
+            class="JD_image"
+            src="Poster/IMG_0379.jpg"
+            alt="JD & lighting bolt"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              JD logo design with detective elements and his signature lighting
+              bolt tattoo
+            </div>
+          </div>
+        </div>
+        <div class="image-item" onclick="openModal('modal11')">
+          <img
+            class="JD_image"
+            src="Card/IMG_7658.jpg"
+            alt="Jack winning Indian Wells"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              A card that celebrates Jack's triumph at Indian Wells
+            </div>
+          </div>
+        </div>
+
+        <div class="image-item" onclick="openModal('modal12')">
+          <img
+            class="JD_image"
+            src="Card/IMG_1598.jpg"
+            alt="Memories in Madrid"
+          />
+          <div class="image-overlay">
+            <div class="overlay-content">
+              A card to remember that days spent in Madrid'25
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h2>Jack Draper Poster</h2>
+        <p>
+          From Indian Wells to Miami to Madrid & the poster traveled across the
+          globe and so am I
+        </p>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <h2>Jack enter top 10</h2>
+        <p>
+          After the match against Carlos at IW Semifinal, Jack entered Top 10
+          for the first time! What a match, but I know there will be more to
+          come
+        </p>
+      </div>
+    </div>
+
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal3')">&times;</span>
+        <h2>Definitely Maybe Draper ver.</h2>
+        <p>
+          Music is an integral part of our life, so can't go wrong with the
+          recreation of this Oasis classic
+        </p>
+      </div>
+    </div>
+
+    <div id="modal4" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal4')">&times;</span>
+        <h2>Jack enter top 5</h2>
+        <p>
+          Jack entered into Top 5 after the match against Arnaldi at Madrid
+          Quarterfinals. From IW to Madrid, I was really happy to bear the
+          witness in-person
+        </p>
+      </div>
+    </div>
+
+    <div id="modal5" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal5')">&times;</span>
+        <h2>Madrid Film</h2>
+        <p>
+          Madrid Open ends, but snippets of memories was kept in those films. La
+          Caja Magica is really magical
+        </p>
+      </div>
+    </div>
+
+    <div id="modal6" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal6')">&times;</span>
+        <h2>100 wins</h2>
+        <p>
+          I couldn't be there in-person for Jack's 100 wins but I asked my
+          friend to deliver this message. A milstone out of many that will come.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal7" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal7')">&times;</span>
+        <h2>Nike striped outfit</h2>
+        <p>
+          From Indian Wells Round 3 to Rome Quarterfinals, this outfit carries a
+          lot of good memories. Luckily, I was able to secure one after Rome.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal8" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal8')">&times;</span>
+        <h2>RG round of 16</h2>
+        <p>
+          Jack entered the second week of RG for the first time. Should we start
+          calling Jack Clayper :>
+        </p>
+      </div>
+    </div>
+
+    <div id="modal9" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal9')">&times;</span>
+        <h2>Jack enters Top 4</h2>
+        <p>
+          Another career high unclocked! I studied a lot of design from film
+          poster designers and finally landed on this minimalistic design.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal10" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal10')">&times;</span>
+        <h2>JD & lighting bolt</h2>
+        <p>
+          A JD logo design that got inspiration from the skateboard culture
+          which symbolizes youth and brave, detective elements and the signature
+          light bolt tattoo.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal11" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal11')">&times;</span>
+        <h2>Jack winning IW</h2>
+        <p>A card that celebrates Jack's win at Indian Wells.</p>
+      </div>
+    </div>
+
+    <div id="modal12" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal12')">&times;</span>
+        <h2>Memories of Madrid</h2>
+        <p>
+          A card that documents the days spent in Madrid watching Jack practices
+          and his matches.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside of it
+      window.onclick = function (event) {
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach((modal) => {
+          if (event.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        });
+      };
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const modals = document.querySelectorAll(".modal");
+          modals.forEach((modal) => {
+            if (modal.style.display === "block") {
+              modal.style.display = "none";
+              document.body.style.overflow = "auto";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

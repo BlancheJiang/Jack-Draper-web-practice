@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jack Draper - 2025 Results</title>
+    <style>
+      body {
+        font-family: Georgia, serif;
+        padding: 50px;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .hero-section {
+        position: relative;
+        height: 60vh;
+        background-image: url("picture/IMG_7653.jpg");
+        background-size: cover;
+        background-position: center 10%;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+      h1 {
+        color: white;
+        text-align: center;
+        margin: 20px;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        z-index: 2;
+        position: relative;
+        animation: titleSmoothEntrance 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-origin: center;
+      }
+
+      /* Smooth and chic entrance animation */
+      @keyframes titleSmoothEntrance {
+        0% {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+          filter: blur(3px);
+          letter-spacing: 0.1em;
+        }
+        40% {
+          opacity: 0.7;
+          transform: translateY(10px) scale(0.98);
+          filter: blur(1px);
+          letter-spacing: 0.05em;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0px);
+          letter-spacing: normal;
+        }
+      }
+
+      /* Elegant shimmer effect */
+      h1::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(255,255,255,0.3), 
+          transparent);
+        animation: titleShimmer 3s ease-in-out 1.5s;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes titleShimmer {
+        0% {
+          left: -100%;
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          opacity: 0;
+        }
+      }
+
+      /* Refined hover effect */
+      h1:hover {
+        transform: translateY(-2px);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 
+                     0 0 20px rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        letter-spacing: 0.02em;
+      }
+
+      .back-link {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        z-index: 10;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        animation: backLinkSlide 1.5s ease-out 0.5s both;
+      }
+
+      @keyframes backLinkSlide {
+        0% {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        animation: contentFadeIn 1s ease-out 1.5s both;
+      }
+
+      @keyframes contentFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .year-header {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 40px 0 30px 0;
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      .tournament-section {
+        margin-bottom: 30px;
+      }
+
+      .tournament-header {
+        background-color: #ffffff;
+        padding: 20px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: between;
+        align-items: center;
+      }
+
+      .tournament-header:hover {
+        background-color: #f8f9fa;
+      }
+
+      .tournament-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #2c3e50;
+        flex-grow: 1;
+      }
+
+      .tournament-summary {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        margin-left: 20px;
+      }
+
+      .toggle-icon {
+        font-size: 1.2rem;
+        color: #3498db;
+        margin-left: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .tournament-content {
+        display: none;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+
+      .tournament-content.active {
+        display: block;
+      }
+
+      .tournament-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .tournament-table th {
+        background-color: #f1f3f4;
+        color: #2c3e50;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .tournament-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.95rem;
+      }
+
+      .tournament-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .tournament-table tr:hover {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+      }
+
+      .date-col {
+        width: 15%;
+        color: #7f8c8d;
+      }
+
+      .round-col {
+        width: 25%;
+      }
+
+      .opponent-col {
+        width: 35%;
+        color: #2c3e50;
+      }
+
+      .result-col {
+        width: 15%;
+        text-align: center;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+      }
+
+      .winlose-col {
+        width: 10%;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .win {
+        color: #27ae60;
+      }
+
+      .loss {
+        color: #e74c3c;
+      }
+
+      .round-name {
+        color: #f39c12;
+        font-weight: bold;
+      }
+
+      .opponent {
+        color: #2c3e50;
+      }
+
+      .score {
+        color: #2c3e50;
+      }
+
+      .tournament-title.winner {
+        color: #27ae60;
+      }
+
+      .tournament-title.finalist {
+        color: #f39c12;
+      }
+
+      .tournament-title.semifinalist {
+        color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-section">
+      <a href="<!DOCTYPE html>.html" class="back-link">← Back to Home</a>
+      <h1>2025 Tournament Results</h1>
+    </div>
+    <div class="container">
+      <div class="upcoming-section">
+        <h2 class="upcoming-header">Upcoming Tournament</h2>
+        <div class="upcoming-tournament">
+          <a
+            href="https://www.wimbledon.com/index.html"
+            target="_blank"
+            class="tournament-link"
+          >
+            <div class="tournament-name">Wimbledon</div>
+            <div class="tournament-details">
+              <div class="tournament-date">June 30 - July 13, 2025</div>
+              <div class="tournament-location">All England Club, London</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <h2 class="year-header">2025</h2>
+
+      <!-- Queen's Club Championships -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('queens')">
+          <span class="tournament-title semifinalist"
+            >Queen's Club Championships</span
+          >
+          <span class="tournament-summary">Semifinals • 3W-1L</span>
+          <span class="toggle-icon" id="queens-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="queens-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">21.06.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Semifinals</span>
+                </td>
+                <td class="opponent-col">Jiri Lehecka</td>
+                <td class="result-col score">4-6, 6-4, 5-7</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">20.06.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Quarterfinals</span>
+                </td>
+                <td class="opponent-col">Brandon Nakashima</td>
+                <td class="result-col score">6-4, 5-7, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">18.06.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Alexei Popyrin</td>
+                <td class="result-col score">3-6, 6-2, 7-6(5)</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">17.06.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Jenson Brooksby</td>
+                <td class="result-col score">6-3, 6-1</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Roland Garros -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('roland')">
+          <span class="tournament-title">Roland Garros (French Open)</span>
+          <span class="tournament-summary">Fourth Round • 3W-1L</span>
+          <span class="toggle-icon" id="roland-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="roland-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">02.06.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Fourth Round</span>
+                </td>
+                <td class="opponent-col">Alexander Bublik</td>
+                <td class="result-col score">7-5, 3-6, 2-6, 4-6</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">31.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Third Round</span>
+                </td>
+                <td class="opponent-col">Joao Fonseca</td>
+                <td class="result-col score">6-2, 6-4, 6-2</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">30.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Second Round</span>
+                </td>
+                <td class="opponent-col">Gael Monfils</td>
+                <td class="result-col score">6-3, 4-6, 6-3, 7-5</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">27.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">First Round</span>
+                </td>
+                <td class="opponent-col">Mattia Bellucci</td>
+                <td class="result-col score">3-6, 6-1, 6-4, 6-2</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Italian Open -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('italian')">
+          <span class="tournament-title">Italian Open (Rome)</span>
+          <span class="tournament-summary">Quarterfinals • 3W-1L</span>
+          <span class="toggle-icon" id="italian-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="italian-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">14.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Quarterfinals</span>
+                </td>
+                <td class="opponent-col">Carlos Alcaraz</td>
+                <td class="result-col score">4-6, 4-6</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">13.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Corentin Moutet</td>
+                <td class="result-col score">1-6, 6-4, 6-3</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">11.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Vit Kopriva</td>
+                <td class="result-col score">6-4, 6-3</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">10.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 64</span>
+                </td>
+                <td class="opponent-col">Luciano Darderi</td>
+                <td class="result-col score">6-1, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Madrid Open -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('madrid')">
+          <span class="tournament-title finalist">Madrid Open</span>
+          <span class="tournament-summary">Finalist • 5W-1L</span>
+          <span class="toggle-icon" id="madrid-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="madrid-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">05.05.2025</td>
+                <td class="round-col"><span class="round-name">Final</span></td>
+                <td class="opponent-col">Casper Ruud</td>
+                <td class="result-col score">5-7, 6-3, 4-6</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">03.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Semifinals</span>
+                </td>
+                <td class="opponent-col">Lorenzo Musetti</td>
+                <td class="result-col score">6-3, 7-6(4)</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">01.05.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Quarterfinals</span>
+                </td>
+                <td class="opponent-col">Matteo Arnaldi</td>
+                <td class="result-col score">6-0, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">30.04.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Tommy Paul</td>
+                <td class="result-col score">6-2, 6-2</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">29.04.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Matteo Berrettini</td>
+                <td class="result-col score">7-6(2),(Ret.)</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">27.04.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 64</span>
+                </td>
+                <td class="opponent-col">Tallon Griekspoor</td>
+                <td class="result-col score">6-3, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Monte Carlo Masters -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('montecarlo')">
+          <span class="tournament-title">Monte Carlo Masters</span>
+          <span class="tournament-summary">Round of 16 • 1W-1L</span>
+          <span class="toggle-icon" id="montecarlo-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="montecarlo-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">10.04.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Alejandro Davidovich Fokina</td>
+                <td class="result-col score">3-6, 7-6(6), 4-6</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">09.04.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Marcos Giron</td>
+                <td class="result-col score">6-1, 6-1</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Miami Open -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('miami')">
+          <span class="tournament-title">Miami Open</span>
+          <span class="tournament-summary">Round of 64 • 0W-1L</span>
+          <span class="toggle-icon" id="miami-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="miami-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">23.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 64</span>
+                </td>
+                <td class="opponent-col">Jakub Mensik</td>
+                <td class="result-col score">7-6(2), 7-6(3)</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Indian Wells -->
+      <div class="tournament-section">
+        <div
+          class="tournament-header"
+          onclick="toggleTournament('indianwells')"
+        >
+          <span class="tournament-title winner">Indian Wells (Champion)</span>
+          <span class="tournament-summary">Winner • 6W-0L</span>
+          <span class="toggle-icon" id="indianwells-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="indianwells-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">17.03.2025</td>
+                <td class="round-col"><span class="round-name">Final</span></td>
+                <td class="opponent-col">Holger Rune</td>
+                <td class="result-col score">6-2, 6-2</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">16.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Semifinals</span>
+                </td>
+                <td class="opponent-col">Carlos Alcaraz</td>
+                <td class="result-col score">6-1, 0-6, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">14.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Quarterfinals</span>
+                </td>
+                <td class="opponent-col">Ben Shelton</td>
+                <td class="result-col score">6-4, 7-5</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">13.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Taylor Fritz</td>
+                <td class="result-col score">7-5, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">11.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Jenson Brooksby</td>
+                <td class="result-col score">7-5, 6-4</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">09.03.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 64</span>
+                </td>
+                <td class="opponent-col">Joao Fonseca</td>
+                <td class="result-col score">6-4, 6-0</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Qatar Open -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('qatar')">
+          <span class="tournament-title finalist">Qatar Open</span>
+          <span class="tournament-summary">Finalist • 4W-1L</span>
+          <span class="toggle-icon" id="qatar-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="qatar-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">22.02.2025</td>
+                <td class="round-col"><span class="round-name">Final</span></td>
+                <td class="opponent-col">Andrey Rublev</td>
+                <td class="result-col score">5-7, 7-5, 1-6</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">22.02.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Semifinals</span>
+                </td>
+                <td class="opponent-col">Jiri Lehecka</td>
+                <td class="result-col score">3-6, 7-6(2), 6-3</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="
