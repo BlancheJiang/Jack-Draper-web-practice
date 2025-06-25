@@ -5,154 +5,51 @@
     <style>
       body {
         font-family: Georgia, serif;
-        padding: 50px;
-        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: #000000;
         line-height: 1.6;
-        max-width: 800px;
-        margin: 0 auto;
       }
-      .hero-section {
-        position: relative;
-        height: 60vh;
-        background-image: url("picture/IMG_7653.jpg");
-        background-size: cover;
-        background-position: center 10%;
-        background-repeat: no-repeat;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        z-index: 1;
-      }
-      h1 {
-        color: white;
+
+      .header {
+        background-color: #ffffff;
+        padding: 30px 0;
         text-align: center;
-        margin: 20px;
-        font-size: 2rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        z-index: 2;
-        position: relative;
-        animation: titleSmoothEntrance 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transform-origin: center;
+        border-bottom: 2px solid #e0e0e0;
       }
 
-      /* Smooth and chic entrance animation */
-      @keyframes titleSmoothEntrance {
-        0% {
-          opacity: 0;
-          transform: translateY(30px) scale(0.95);
-          filter: blur(3px);
-          letter-spacing: 0.1em;
-        }
-        40% {
-          opacity: 0.7;
-          transform: translateY(10px) scale(0.98);
-          filter: blur(1px);
-          letter-spacing: 0.05em;
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-          filter: blur(0px);
-          letter-spacing: normal;
-        }
+      .header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #2c3e50;
       }
 
-      /* Elegant shimmer effect */
-      h1::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, 
-          transparent, 
-          rgba(255,255,255,0.3), 
-          transparent);
-        animation: titleShimmer 3s ease-in-out 1.5s;
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      @keyframes titleShimmer {
-        0% {
-          left: -100%;
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          left: 100%;
-          opacity: 0;
-        }
-      }
-
-      /* Refined hover effect */
-      h1:hover {
-        transform: translateY(-2px);
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 
-                     0 0 20px rgba(255, 255, 255, 0.2);
-        transition: all 0.4s ease;
-        letter-spacing: 0.02em;
+      .header p {
+        margin: 10px 0 0 0;
+        font-size: 1.2rem;
+        color: #7f8c8d;
       }
 
       .back-link {
         position: absolute;
         top: 30px;
         left: 30px;
-        color: white;
+        color: #2c3e50;
         text-decoration: none;
         font-weight: bold;
-        z-index: 10;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        animation: backLinkSlide 1.5s ease-out 0.5s both;
-      }
-
-      @keyframes backLinkSlide {
-        0% {
-          opacity: 0;
-          transform: translateX(-30px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
+        transition: all 0.3s ease;
       }
 
       .back-link:hover {
-        text-decoration: underline;
-        transform: translateX(5px);
-        transition: all 0.3s ease;
+        color: #3498db;
+        transform: scale(1.05);
       }
 
       .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 40px 20px;
-        animation: contentFadeIn 1s ease-out 1.5s both;
-      }
-
-      @keyframes contentFadeIn {
-        0% {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
       }
 
       .year-header {
@@ -175,7 +72,7 @@
         transition: background-color 0.3s ease;
         border-bottom: 1px solid #e0e0e0;
         display: flex;
-        justify-content: between;
+        justify-content: space-between;
         align-items: center;
       }
 
@@ -311,27 +208,13 @@
     </style>
   </head>
   <body>
-    <div class="hero-section">
+    <div class="header">
       <a href="index.html" class="back-link">← Back to Home</a>
-      <h1>2025 Tournament Results</h1>
+      <h1>Jack Draper</h1>
+      <p>2025 Tournament Results</p>
     </div>
+
     <div class="container">
-      <div class="upcoming-section">
-        <h2 class="upcoming-header">Upcoming Tournament</h2>
-        <div class="upcoming-tournament">
-          <a
-            href="https://www.wimbledon.com/index.html"
-            target="_blank"
-            class="tournament-link"
-          >
-            <div class="tournament-name">Wimbledon</div>
-            <div class="tournament-details">
-              <div class="tournament-date">June 30 - July 13, 2025</div>
-              <div class="tournament-location">All England Club, London</div>
-            </div>
-          </a>
-        </div>
-      </div>
       <h2 class="year-header">2025</h2>
 
       <!-- Queen's Club Championships -->
@@ -548,7 +431,7 @@
                   <span class="round-name">Semifinals</span>
                 </td>
                 <td class="opponent-col">Lorenzo Musetti</td>
-                <td class="result-col score">6-3, 7-6(4)</td>
+                <td class="result-col score">6-3, 7-6(7)</td>
                 <td class="winlose-col win">W</td>
               </tr>
               <tr>
@@ -575,7 +458,7 @@
                   <span class="round-name">Round of 32</span>
                 </td>
                 <td class="opponent-col">Matteo Berrettini</td>
-                <td class="result-col score">7-6(2),(Ret.)</td>
+                <td class="result-col score">7-6(2), 6-2 (Ret.)</td>
                 <td class="winlose-col win">W</td>
               </tr>
               <tr>
@@ -617,7 +500,7 @@
                   <span class="round-name">Round of 16</span>
                 </td>
                 <td class="opponent-col">Alejandro Davidovich Fokina</td>
-                <td class="result-col score">3-6, 7-6(6), 4-6</td>
+                <td class="result-col score">3-7, 6-6, 4-6</td>
                 <td class="winlose-col loss">L</td>
               </tr>
               <tr>
@@ -659,7 +542,7 @@
                   <span class="round-name">Round of 64</span>
                 </td>
                 <td class="opponent-col">Jakub Mensik</td>
-                <td class="result-col score">7-6(2), 7-6(3)</td>
+                <td class="result-col score">6-2, 6-3</td>
                 <td class="winlose-col loss">L</td>
               </tr>
             </tbody>
@@ -674,7 +557,7 @@
           onclick="toggleTournament('indianwells')"
         >
           <span class="tournament-title winner">Indian Wells (Champion)</span>
-          <span class="tournament-summary">Winner • 6W-0L</span>
+          <span class="tournament-summary">Winner • 5W-0L</span>
           <span class="toggle-icon" id="indianwells-icon">▼</span>
         </div>
         <div class="tournament-content" id="indianwells-content">
@@ -702,7 +585,7 @@
                   <span class="round-name">Semifinals</span>
                 </td>
                 <td class="opponent-col">Carlos Alcaraz</td>
-                <td class="result-col score">6-1, 0-6, 6-4</td>
+                <td class="result-col score">6-1, 6-4</td>
                 <td class="winlose-col win">W</td>
               </tr>
               <tr>
@@ -782,4 +665,65 @@
                 <td class="winlose-col win">W</td>
               </tr>
               <tr>
-                <td class="
+                <td class="date-col">21.02.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Quarterfinals</span>
+                </td>
+                <td class="opponent-col">Matteo Berrettini</td>
+                <td class="result-col score">4-6, 6-4, 6-3</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">19.02.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 16</span>
+                </td>
+                <td class="opponent-col">Christopher O'Connell</td>
+                <td class="result-col score">6-2, 6-1</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+              <tr>
+                <td class="date-col">18.02.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Round of 32</span>
+                </td>
+                <td class="opponent-col">Alexei Popyrin</td>
+                <td class="result-col score">6-2, 7-6(4)</td>
+                <td class="winlose-col win">W</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Australian Open -->
+      <div class="tournament-section">
+        <div class="tournament-header" onclick="toggleTournament('ausopen')">
+          <span class="tournament-title">Australian Open</span>
+          <span class="tournament-summary">Fourth Round • 3W-1L</span>
+          <span class="toggle-icon" id="ausopen-icon">▼</span>
+        </div>
+        <div class="tournament-content" id="ausopen-content">
+          <table class="tournament-table">
+            <thead>
+              <tr>
+                <th class="date-col">Date</th>
+                <th class="round-col">Round</th>
+                <th class="opponent-col">Opponent</th>
+                <th class="result-col">Result</th>
+                <th class="winlose-col">W/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="date-col">19.01.2025</td>
+                <td class="round-col">
+                  <span class="round-name">Fourth Round</span>
+                </td>
+                <td class="opponent-col">Carlos Alcaraz</td>
+                <td class="result-col score">5-7, 1-6, Ret.</td>
+                <td class="winlose-col loss">L</td>
+              </tr>
+              <tr>
+                <td class="date-col">17.01.2025</td>
+                <t
