@@ -11,6 +11,7 @@
         color: #000000;
         line-height: 1.6;
       }
+      
       .hero-section {
         position: relative;
         height: 60vh;
@@ -23,7 +24,10 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        text-align: center;
+        padding: 30px 0;
       }
+      
       .hero-section::before {
         content: "";
         position: absolute;
@@ -35,33 +39,34 @@
         z-index: 1;
       }
 
-      .hero-section {
-        background-color: #ffffff;
-        padding: 30px 0;
-        text-align: center;
-        border-bottom: 2px solid #e0e0e0;
-      }
-
       .hero-section h1 {
+        position: relative;
+        z-index: 2;
         margin: 0;
         font-size: 2.5rem;
-        color: #2c3e50;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
       }
 
       .hero-section p {
+        position: relative;
+        z-index: 2;
         margin: 10px 0 0 0;
         font-size: 1.2rem;
-        color: #7f8c8d;
+        color: #ffffff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
       }
 
       .back-link {
         position: absolute;
         top: 30px;
         left: 30px;
-        color: #2c3e50;
+        color: #ffffff;
         text-decoration: none;
         font-weight: bold;
         transition: all 0.3s ease;
+        z-index: 2;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
       }
 
       .back-link:hover {
@@ -95,7 +100,7 @@
         transition: background-color 0.3s ease;
         border-bottom: 1px solid #e0e0e0;
         display: flex;
-        justify-content: between;
+        justify-content: space-between;
         align-items: center;
       }
 
@@ -231,8 +236,8 @@
     </style>
   </head>
   <body>
-    <div class ="hero-section">
-      <a href="<!DOCTYPE html>.html" class="back-link">← Back to Home</a>
+    <div class="hero-section">
+      <a href="index.html" class="back-link">← Back to Home</a>
       <h1>Jack Draper</h1>
       <p>2025 Tournament Results</p>
     </div>
@@ -242,7 +247,7 @@
 
       <!-- Queen's Club Championships -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('queens')">
+        <div class="tournament-header" data-tournament="queens">
           <span class="tournament-title semifinalist"
             >Queen's Club Championships</span
           >
@@ -304,7 +309,7 @@
 
       <!-- Roland Garros -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('roland')">
+        <div class="tournament-header" data-tournament="roland">
           <span class="tournament-title">Roland Garros (French Open)</span>
           <span class="tournament-summary">Fourth Round • 3W-1L</span>
           <span class="toggle-icon" id="roland-icon">▼</span>
@@ -364,7 +369,7 @@
 
       <!-- Italian Open -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('italian')">
+        <div class="tournament-header" data-tournament="italian">
           <span class="tournament-title">Italian Open (Rome)</span>
           <span class="tournament-summary">Quarterfinals • 3W-1L</span>
           <span class="toggle-icon" id="italian-icon">▼</span>
@@ -424,7 +429,7 @@
 
       <!-- Madrid Open -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('madrid')">
+        <div class="tournament-header" data-tournament="madrid">
           <span class="tournament-title finalist">Madrid Open</span>
           <span class="tournament-summary">Finalist • 5W-1L</span>
           <span class="toggle-icon" id="madrid-icon">▼</span>
@@ -500,7 +505,7 @@
 
       <!-- Monte Carlo Masters -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('montecarlo')">
+        <div class="tournament-header" data-tournament="montecarlo">
           <span class="tournament-title">Monte Carlo Masters</span>
           <span class="tournament-summary">Round of 16 • 1W-1L</span>
           <span class="toggle-icon" id="montecarlo-icon">▼</span>
@@ -519,7 +524,7 @@
             <tbody>
               <tr>
                 <td class="date-col">10.04.2025</td>
-                <td class="round-col">
+                <td class="row-col">
                   <span class="round-name">Round of 16</span>
                 </td>
                 <td class="opponent-col">Alejandro Davidovich Fokina</td>
@@ -542,7 +547,7 @@
 
       <!-- Miami Open -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('miami')">
+        <div class="tournament-header" data-tournament="miami">
           <span class="tournament-title">Miami Open</span>
           <span class="tournament-summary">Round of 64 • 0W-1L</span>
           <span class="toggle-icon" id="miami-icon">▼</span>
@@ -577,7 +582,7 @@
       <div class="tournament-section">
         <div
           class="tournament-header"
-          onclick="toggleTournament('indianwells')"
+          data-tournament="indianwells"
         >
           <span class="tournament-title winner">Indian Wells (Champion)</span>
           <span class="tournament-summary">Winner • 5W-0L</span>
@@ -654,7 +659,7 @@
 
       <!-- Qatar Open -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('qatar')">
+        <div class="tournament-header" data-tournament="qatar">
           <span class="tournament-title finalist">Qatar Open</span>
           <span class="tournament-summary">Finalist • 4W-1L</span>
           <span class="toggle-icon" id="qatar-icon">▼</span>
@@ -721,7 +726,7 @@
 
       <!-- Australian Open -->
       <div class="tournament-section">
-        <div class="tournament-header" onclick="toggleTournament('ausopen')">
+        <div class="tournament-header" data-tournament="ausopen">
           <span class="tournament-title">Australian Open</span>
           <span class="tournament-summary">Fourth Round • 3W-1L</span>
           <span class="toggle-icon" id="ausopen-icon">▼</span>
@@ -730,92 +735,4 @@
           <table class="tournament-table">
             <thead>
               <tr>
-                <th class="date-col">Date</th>
-                <th class="round-col">Round</th>
-                <th class="opponent-col">Opponent</th>
-                <th class="result-col">Result</th>
-                <th class="winlose-col">W/L</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="date-col">19.01.2025</td>
-                <td class="round-col">
-                  <span class="round-name">Fourth Round</span>
-                </td>
-                <td class="opponent-col">Carlos Alcaraz</td>
-                <td class="result-col score">5-7, 1-6, Ret.</td>
-                <td class="winlose-col loss">L</td>
-              </tr>
-              <tr>
-                <td class="date-col">17.01.2025</td>
-                <td class="round-col">
-                  <span class="round-name">Third Round</span>
-                </td>
-                <td class="opponent-col">Aleksandar Vukic</td>
-                <td class="result-col score">6-4, 2-6, 5-7, 7-6(5), 6-8</td>
-                <td class="winlose-col win">W</td>
-              </tr>
-              <tr>
-                <td class="date-col">15.01.2025</td>
-                <td class="round-col">
-                  <span class="round-name">Second Round</span>
-                </td>
-                <td class="opponent-col">Thanasi Kokkinakis</td>
-                <td class="result-col score">6-3, 6-3, 3-7, 6-5, 6-3</td>
-                <td class="winlose-col win">W</td>
-              </tr>
-              <tr>
-                <td class="date-col">13.01.2025</td>
-                <td class="round-col">
-                  <span class="round-name">First Round</span>
-                </td>
-                <td class="opponent-col">Mariano Navone</td>
-                <td class="result-col score">4-6, 6-3, 3-6, 6-3, 6-2</td>
-                <td class="winlose-col win">W</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function toggleTournament(tournamentId) {
-        const content = document.getElementById(tournamentId + "-content");
-        const icon = document.getElementById(tournamentId + "-icon");
-
-        if (content.classList.contains("active")) {
-          content.classList.remove("active");
-          icon.innerHTML = "▼";
-          icon.style.transform = "rotate(0deg)";
-        } else {
-          content.classList.add("active");
-          icon.innerHTML = "▲";
-          icon.style.transform = "rotate(180deg)";
-        }
-      }
-
-      // Optional: Close all other tournaments when opening one
-      function toggleTournamentExclusive(tournamentId) {
-        // Close all tournaments first
-        const allContents = document.querySelectorAll(".tournament-content");
-        const allIcons = document.querySelectorAll(".toggle-icon");
-
-        allContents.forEach((content) => content.classList.remove("active"));
-        allIcons.forEach((icon) => {
-          icon.innerHTML = "▼";
-          icon.style.transform = "rotate(0deg)";
-        });
-
-        // Open the clicked tournament
-        const content = document.getElementById(tournamentId + "-content");
-        const icon = document.getElementById(tournamentId + "-icon");
-
-        content.classList.add("active");
-        icon.innerHTML = "▲";
-        icon.style.transform = "rotate(180deg)";
-      }
-    </script>
-  </body>
-</html>
+                <th class="date-col">Date
