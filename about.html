@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About Jack Draper</title>
+    <style>
+      body {
+        font-family: Georgia, serif;
+        padding: 50px;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .hero-section {
+        position: relative;
+        height: 60vh;
+        background-image: url("picture/IMG_8013.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin: 20px;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        z-index: 2;
+        position: relative;
+        animation: titleSmoothEntrance 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-origin: center;
+      }
+
+      /* Smooth and chic entrance animation */
+      @keyframes titleSmoothEntrance {
+        0% {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+          filter: blur(3px);
+          letter-spacing: 0.1em;
+        }
+        40% {
+          opacity: 0.7;
+          transform: translateY(10px) scale(0.98);
+          filter: blur(1px);
+          letter-spacing: 0.05em;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0px);
+          letter-spacing: normal;
+        }
+      }
+
+      /* Elegant shimmer effect */
+      h1::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: titleShimmer 3s ease-in-out 1.5s;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes titleShimmer {
+        0% {
+          left: -100%;
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          opacity: 0;
+        }
+      }
+
+      /* Refined hover effect */
+      h1:hover {
+        transform: translateY(-2px);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7),
+          0 0 20px rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        letter-spacing: 0.02em;
+      }
+
+      h2 {
+        color: #34495e;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        margin-top: 40px;
+      }
+      h3 {
+        color: #2980b9;
+        margin-top: 25px;
+      }
+      .back-link {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        z-index: 10;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        animation: backLinkSlide 1.5s ease-out 0.5s both;
+      }
+
+      @keyframes backLinkSlide {
+        0% {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .container{
+        width: 600px;
+        height: 315px;
+        position:relative;
+        align-content: center;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+      }
+
+      .conclusion {
+        background-image: url("picture/image.webp");
+        background-size: cover;
+        background-position: center 20%;
+        background-repeat: no-repeat;
+        position: relative;
+        padding: 40px;
+        border-left: none;
+        margin-top: 30px;
+        font-style: italic;
+        color: white;
+      }
+      .conclusion::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 1;
+      }
+
+      .conclusion p {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        color: #ffffff;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9),
+          1px 1px 3px rgba(0, 0, 0, 0.8);
+      }
+      ul {
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      .section-image {
+        width: 120%;
+        max-width: 600px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        margin: 30px auto;
+        display: block;
+      }
+
+      .image-section {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .image-section_2 {
+        text-align: center;
+        height: 300px;
+        margin: 40px 0;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .section-image_2 {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Add subtle animation to content sections */
+      .content-section {
+        animation: contentFadeIn 1s ease-out 1.5s both;
+      }
+
+      @keyframes contentFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Apply the smooth entrance animation */
+      h1 {
+        animation: titleSmoothEntrance 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-section">
+      <a href="<!DOCTYPE html>.html" class="back-link">← Back to Home</a>
+      <h1>Jack Draper's Tennis Journey:<br />The Rising British Star</h1>
+    </div>
+
+    <div class="content-section">
+      <h2>Early Life & Background</h2>
+      <p>
+        Jack Alexander Draper was born on December 22, 2001, in Sutton, London,
+        and raised in Ashtead, Surrey. Tennis runs in his family - his father
+        Roger Draper was the former chief executive of Sport England and the
+        Lawn Tennis Association, while his mother Nicky Draper was a former
+        junior British tennis champion and coach who first trained Jack when he
+        started at age 6.
+      </p>
+      <div class="image-section_2">
+        <img
+          src="picture/IMG_6666.png"
+          alt="Jack Draper US Open"
+          class="section-image_2"
+        />
+      </div>
+      <h2>Unique Playing Style</h2>
+      <p>
+        Draper's playing style is characterized by an aggressive all-around game
+        and strong serve. Despite being naturally right-handed, he plays
+        left-handed, which essentially makes his backhand a second forehand. His
+        forehand has been compared to Nadal's in its topspin, pace, and
+        consistency. He has a great ability to mix up his serve, using slices
+        and flat serves to keep opponents guessing on the return.
+      </p>
+
+      <p>
+        His "can-opener" serve creates particularly difficult angles for
+        opponents, and his forehand combines power with a unique mix of top and
+        side-spin that makes the ball drift sideways at the last instant,
+        catching opponents off-guard.
+      </p>
+
+      <p>
+        A few years ago, ATP filmed a video with Jack, so here is a Day with Jack:
+      </p>
+      <div class="container">
+        <iframe
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/PFONZwsOmKA?si=MR60guIc22c6Cpwv"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+      picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+
+      <h2>Major Career Milestones</h2>
+
+      <div class="image-section">
+        <img
+          src="picture/IMG_9090.png"
+          alt="Jack Draper Stuttgart title"
+          class="section-image"
+        />
+      </div>
+
+      <h3>2024 - Breakthrough Year:</h3>
+      <ul>
+        <li>
+          Won his first ATP title at the Stuttgart Open, becoming British men's
+          No. 1
+        </li>
+        <li>
+          Claimed his first ATP 500 title at the Vienna Open, defeating Karen
+          Khachanov in the final
+        </li>
+        <li>Reached his first Grand Slam semifinal at the 2024 US Open</li>
+        <li>
+          Became the youngest British No. 1 since Andy Murray at the same age in
+          2009
+        </li>
+      </ul>
+
+      <div class="image-section">
+        <img
+          src="picture/IMG_1089.JPG"
+          alt="Jack Draper IW title"
+          class="section-image"
+        />
+      </div>
+
+      <h3>2025 - Continued Success:</h3>
+      <ul>
+        <li>Won his first Masters 1000 title at the 2025 Indian Wells Open</li>
+        <li>
+          Reached the final of the Madrid Open, becoming only the second Brit
+          after Andy Murray to make that final
+        </li>
+        <li>
+          Currently ranked world No. 5 and moving up to world No. 4 as his
+          career-high
+        </li>
+      </ul>
+
+      <div class="conclusion">
+        <p>
+          <strong
+            >The nickname "The Star in the Making" perfectly captures Jack
+            Draper's trajectory</strong
+          >
+          - from a promising junior with tennis in his DNA to Britain's new No.
+          1 and a legitimate contender for major titles. His unique left-handed
+          style, combined with his powerful serve and Nadal-esque forehand,
+          makes him one of the most exciting young talents in tennis today.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
